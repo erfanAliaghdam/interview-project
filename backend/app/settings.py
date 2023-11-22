@@ -3,15 +3,9 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-juz3x(y^7lx3#h987anoyizr5uqga9=w8nnyswg4k6x-8=lgpp"
+SECRET_KEY = os.environ.get("DJANGO_SECRET", "insecure")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -151,7 +145,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_EXP_CLAIM': 'exp',
 }
 
-# user id prefix
+# user unique identifier prefix
 USER_IDENTIFIER_PREFIX = os.environ.get("USER_IDENTIFIER_PREFIX", "user")
 
 
