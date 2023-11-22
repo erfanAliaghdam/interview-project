@@ -15,7 +15,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
                 "data": response.data
             }
             return response
-        except exceptions.AuthenticationFailed:
+        except Exception as e:
             return Response(
                 {
                     "status": "failed",

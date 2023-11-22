@@ -1,0 +1,1 @@
+from .is_authenticated_supporter_permission import IsAuthenticatedSupport
