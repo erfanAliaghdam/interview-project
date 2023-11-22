@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     # apps
     "users.apps.UsersConfig",
     "core.apps.CoreConfig",
+    "car.apps.CarConfig",
+
     # third party apps
     "rest_framework",
     "rest_framework_simplejwt"
