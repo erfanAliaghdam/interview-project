@@ -18,6 +18,8 @@ def generate_development_seed():
         GroupFactory.create(name=group)
     UserFactory.create_batch(100, assign_to_group="Client")
     UserFactory.create_batch(20, assign_to_group="Support")
+    UserFactory.create_batch(20, assign_to_group="Sale")
+
     UserFactory.create_batch(12, is_staff=True)
 
     print(str(get_user_model().objects.all().count()), "users created. ")

@@ -154,6 +154,4 @@ USER_IDENTIFIER_PREFIX = os.environ.get("USER_IDENTIFIER_PREFIX", "user")
 AUTH_USER_MODEL = "users.User"
 
 
-GROUP_LIST = ["Client", "Support"]
-
-
+GROUP_LIST = ["Client", "Support", "Sale"]
