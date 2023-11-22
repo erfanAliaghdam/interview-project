@@ -9,5 +9,5 @@ urlpatterns = [
     path('auth/token/', CustomTokenObtainPairView.as_view(), name='token-create'),
     path('auth/token/refresh/', CustomRefreshTokenView.as_view(), name='token-refresh'),
 
-    path('auth/register/client/', register_client_user_view, name='register-client')
+    path('auth/register/', register_client_user_view, name='register-client')
 ]
