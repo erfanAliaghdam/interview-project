@@ -29,8 +29,8 @@ color_list = ['alizarin', 'amaranth', 'amber', 'amethyst', 'apricot', 'aqua',
               'wisteria', 'yellow', 'zucchini']
 
 
-def validate_color_name(name: str):
-    if name.lower() not in color_list:
+def validate_color_name(color: str):
+    if color.lower() not in color_list:
         return False
     return True
 

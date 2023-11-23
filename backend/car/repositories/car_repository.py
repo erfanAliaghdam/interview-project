@@ -1,3 +1,5 @@
+from django.db import transaction
+
 from car.models import Car
 from django_elasticsearch_dsl.search import Search
 
@@ -39,3 +41,36 @@ class CarRepository:
         cars = query.execute()
 
         return cars
+
+    def get_car_by_id(self, car_id: int):
+        return Car.objects.filter(
+            pk=car_id
+        )
+
+    def check_if_car_exists_by_car_id(self, car_id: int) -> bool:
+        car = self.get_car_by_id(car_id=car_id)
+        if not car.exists():
+            return False
+        return True
+
+    @transaction.atomic
+    def update_car_info_by_car_id(
+            self,
+            car_id: int,
+            color: str,
+            title: str,
+            description: str,
+            carrying_capacity: int,
+            cylinder_number: int,
+            cylinder_capacity: int
+    ):
+        car = self.get_car_by_id(car_id=car_id).select_for_update().first()
+        car.color = color
+        car.title = title
+        car.description = description
+        car.carrying_capacity = carrying_capacity
+        car.cylinder_number = cylinder_number
+        car.cylinder_capacity = cylinder_capacity
+        car.save()
+
+        return car

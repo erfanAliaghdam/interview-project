@@ -1,2 +1,3 @@
 from .is_authenticated_permission import IsAuthenticatedPermission
 from .support_group_permissions import IsAuthenticatedSupport
+from .sale_group_permission import IsAuthenticatedSeller
