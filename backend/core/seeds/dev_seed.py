@@ -16,18 +16,26 @@ def generate_development_seed():
     print("!!! superuser email for development environment: ", superuser_email, " !!!")
     print("!!! superuser password for development environment: ",
           default_password, " !!!")
+    print("\n wait .....")
     groups_list = settings.GROUP_LIST
     for group in groups_list:
         GroupFactory.create(name=group)
-    client_users = UserFactory.create_batch(100, assign_to_group="Client")
+    UserFactory.create_batch(10, assign_to_group="Client")
     UserFactory.create_batch(20, assign_to_group="Support")
-    UserFactory.create_batch(20, assign_to_group="Sale")
-    for client in client_users:
+    sale_group_users = UserFactory.create_batch(100, assign_to_group="Sale")
+    for user in sale_group_users:
         number_of_owned_cars = randint(1, 50)
-        CarFactory.create_batch(number_of_owned_cars, owner=client)
+        CarFactory.create_batch(number_of_owned_cars, owner=user)
 
-    support_user = UserFactory.create(assign_to_group="Support")
-    seller_user = UserFactory.create(assign_to_group="Sale")
+    support_user = UserFactory.create(
+        assign_to_group="Support",
+        email="support@example.com"
+    )
+    seller_user = UserFactory.create(
+        assign_to_group="Sale",
+        email="seller@example.com"
+
+    )
     support_user.set_password(default_password)
     seller_user.set_password(default_password)
     support_user.save()

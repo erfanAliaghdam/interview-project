@@ -19,12 +19,12 @@ superuser :
 > password: DefaultPassword
 
 support user (Support Group):
-> email: user140@example.com
+> email: support@example.com
 
 > password: DefaultPassword
 
 seller user (Sale Group):
-> email: user141@example.com
+> email: seller@example.com
 
 > password: DefaultPassword
 
