@@ -16,6 +16,7 @@ class Car(models.Model):
         related_name="cars",
         on_delete=models.RESTRICT
     )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     @property
     def engine_capacity(self):
