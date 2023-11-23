@@ -3,7 +3,7 @@
 
 > find . -path "*/migrations/*.pyc"  -delete
 
-## development seed
+## generate dev seeds
 > python manage.py generate_dev_seeds
 
 note: you can use -y for answering all questions yes by default...
