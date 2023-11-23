@@ -16,8 +16,13 @@ car_repository = CarRepository()
 @authentication_classes([JWTAuthentication])
 def support_group_car_list_view(request):
     paginator = PageNumberPagination()
-    paginator.page_size = 5
-    cars = car_repository.get_all_cars_and_owner_details()
+
+    cars = car_repository.search_cars(
+        search_term=request.GET.get("search_term", None),
+        color=request.GET.get("color", None),
+        cylinder_number=request.GET.get("cylinder_number", None),
+        owner_name=request.GET.get("owner_name", None)
+    )
     paginated_cars = paginator.paginate_queryset(cars, request)
 
     serializer = SupportCarListSerializer(paginated_cars, many=True)
@@ -25,12 +30,12 @@ def support_group_car_list_view(request):
     response = {
         "status": "success",
         "message": "car list retrieved successfully.",
-        "data": serializer.data,
         "pagination": {
             "next": paginator.get_next_link(),
             "previous": paginator.get_previous_link(),
             "count": paginator.page.paginator.count,
-        }
+        },
+        "data": serializer.data
     }
 
     return Response(
