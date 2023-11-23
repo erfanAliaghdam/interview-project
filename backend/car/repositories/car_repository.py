@@ -1,5 +1,4 @@
 from django.db import transaction
-
 from car.models import Car
 from django_elasticsearch_dsl.search import Search
 
@@ -73,4 +72,25 @@ class CarRepository:
         car.cylinder_capacity = cylinder_capacity
         car.save()
 
+        return car
+
+    def create_car(
+            self,
+            color: str,
+            title: str,
+            description: str,
+            carrying_capacity: int,
+            cylinder_number: int,
+            cylinder_capacity: int,
+            owner_id: str
+    ):
+        car = Car.objects.create(
+            color=color,
+            title=title,
+            description=description,
+            carrying_capacity=carrying_capacity,
+            cylinder_number=cylinder_number,
+            cylinder_capacity=cylinder_capacity,
+            owner_id=owner_id
+        )
         return car

@@ -35,6 +35,7 @@ services:
       - ./backend:/app
     depends_on:
       - project-db
+      - elasticsearch
     networks:
       - project-net
 
