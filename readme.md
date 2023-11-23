@@ -1,6 +1,6 @@
 
 ## Note:
- backend documents are in backend dir
+ backend documents are in backend directory
 
 --------------------------
 
