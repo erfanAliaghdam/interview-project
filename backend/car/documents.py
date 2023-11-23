@@ -3,6 +3,7 @@ from car.models import Car
 
 car_index = Index("cars")
 car_index.settings(
+    # should increase shards based on project definition ....
     number_of_shards=1,
     number_of_replicas=0,
 )
