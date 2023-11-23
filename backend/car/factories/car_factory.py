@@ -6,7 +6,7 @@ class CarFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Car
 
-    title = factory.Faker('word')
+    title = factory.Sequence(lambda n: f'car - {n}')
     description = factory.Faker('sentence')
     color = factory.Faker(
         'random_element',
