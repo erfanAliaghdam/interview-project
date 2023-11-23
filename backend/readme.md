@@ -4,6 +4,10 @@
 > find . -path "*/migrations/*.pyc"  -delete
 
 ## generate dev seeds
+step 1 :
+> docker-compose run project-backend sh
+
+step 2:
 > python manage.py generate_dev_seeds
 
 note: you can use -y for answering all questions yes by default...
