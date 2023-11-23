@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.response import Response
 from car.repositories import CarRepository
 from car.api.v1.serializers import (
-    SaleGroupUpdateCarSerializer,
+    SaleGroupCreateCarSerializer,
     SaleGroupDetailCarSerializer
 )
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -12,12 +12,11 @@ from core.permissions import IsAuthenticatedSeller
 car_repository = CarRepository()
 
 
-@api_view(["PUT"])
+@api_view(["POST"])
 @permission_classes([IsAuthenticatedSeller])
 @authentication_classes([JWTAuthentication])
-def sale_group_car_update_view(request, car_id):
-    request.data["id"] = car_id
-    serializer = SaleGroupUpdateCarSerializer(data=request.data)
+def sale_group_car_create_view(request):
+    serializer = SaleGroupCreateCarSerializer(data=request.data)
     if not serializer.is_valid():
         response = {
             "status": "failed",
@@ -28,14 +27,14 @@ def sale_group_car_update_view(request, car_id):
             response,
             status=status.HTTP_400_BAD_REQUEST
         )
-    car = car_repository.update_car_info_by_car_id(
-        car_id=serializer.validated_data.get('id'),
+    car = car_repository.create_car(
         title=serializer.validated_data.get('title'),
         description=serializer.validated_data.get('description'),
         color=serializer.validated_data.get('color'),
         carrying_capacity=serializer.validated_data.get('carrying_capacity'),
         cylinder_number=serializer.validated_data.get('cylinder_number'),
         cylinder_capacity=serializer.validated_data.get('cylinder_capacity'),
+        owner_id=request.user.id
     )
     serializer = SaleGroupDetailCarSerializer(car)
     response = {

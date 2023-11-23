@@ -30,6 +30,8 @@ def generate_development_seed():
     seller_user = UserFactory.create(assign_to_group="Sale")
     support_user.set_password(default_password)
     seller_user.set_password(default_password)
+    support_user.save()
+    seller_user.save()
 
     print(
         "!!! support user email for development environment: ",
