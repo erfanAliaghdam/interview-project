@@ -1,4 +1,3 @@
-
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -24,9 +23,12 @@ INSTALLED_APPS = [
     # apps
     "users.apps.UsersConfig",
     "core.apps.CoreConfig",
+    "car.apps.CarConfig",
+
     # third party apps
     "rest_framework",
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    "django_elasticsearch_dsl"
 ]
 
 MIDDLEWARE = [
@@ -119,16 +121,17 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ),
     "EXCEPTION_HANDLER": "core.exceptions.exception_handler.custom_exception_handler",
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5
     #
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
     # ],
 }
 
-
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=3),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=7),
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=120),
     'ROTATE_REFRESH_TOKENS': False,
@@ -148,10 +151,12 @@ SIMPLE_JWT = {
 # user unique identifier prefix
 USER_IDENTIFIER_PREFIX = os.environ.get("USER_IDENTIFIER_PREFIX", "user")
 
-
 AUTH_USER_MODEL = "users.User"
 
+GROUP_LIST = ["Client", "Support", "Sale"]
 
-GROUP_LIST = ["Client", "Support"]
-
-
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://elasticsearch:9200'
+    },
+}

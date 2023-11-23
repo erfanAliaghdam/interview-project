@@ -20,10 +20,10 @@ class Command(BaseCommand):
         if not options['yes']:
             user_input = input(
                 'Do you want to flush the database ( generating seed without'
-                ' flushing can cause errors )? (yes-y-enter/no-n): '
+                ' flushing can cause errors )? (yes-y/no-n): '
             ).lower()
 
-        if options['yes'] or user_input in ['y', 'yes', '']:
+        if options['yes'] or user_input in ['y', 'yes']:
             self.stdout.write(self.style.SUCCESS('Flushing the database... .'))
             call_command('flush', interactive=False)
             self.stdout.write(self.style.SUCCESS('Database flushed successfully'))

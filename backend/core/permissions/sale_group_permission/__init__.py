@@ -1,0 +1,1 @@
+from .is_authenticated_seller_permission import IsAuthenticatedSeller

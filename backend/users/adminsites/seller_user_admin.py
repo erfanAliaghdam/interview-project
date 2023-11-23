@@ -1,7 +1,7 @@
 from django.contrib.auth.admin import UserAdmin
 
 
-class ClientUserAdmin(UserAdmin):
+class SellerUserAdmin(UserAdmin):
     list_display = (
         'email',
         'first_name',
@@ -33,4 +33,4 @@ class ClientUserAdmin(UserAdmin):
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        return queryset.filter(groups__name="Client")
+        return queryset.filter(groups__name="Sale")
